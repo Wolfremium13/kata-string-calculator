@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Linq;
 
 namespace kata_string_calculator
@@ -11,19 +12,14 @@ namespace kata_string_calculator
             {
                 var delimiter = numbers[2];
                 var numbersWithoutDelimiter = numbers.Substring(4);
-                return SumNumbers(numbersWithoutDelimiter, new[] {delimiter});
+                return SumNumbers(numbersWithoutDelimiter, new[] { delimiter });
             }
-
-            if (numbers.Contains(",") || numbers.Contains("\n"))
-            {
-                return SumNumbers(numbers, new[] {',', '\n'});
-            }
-
-            return int.Parse(numbers);
+            return SumNumbers(numbers, new char[] { });
         }
 
-        private static int SumNumbers(string numbers, char[] delimiters)
+        private static int SumNumbers(string numbers, IEnumerable<char> customDelimiters)
         {
+            var delimiters = new[] { ',', '\n' }.Concat(customDelimiters).ToArray();
             return numbers.Split(delimiters).Aggregate(0, (a, b) => a + int.Parse(b));
         }
     }

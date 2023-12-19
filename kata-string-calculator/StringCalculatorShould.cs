@@ -34,6 +34,7 @@ namespace kata_string_calculator
         public void sum_using_custom_delimiters()
         {
             Assert.Equal(new StringCalculator().Add("//;\n2;3;5"), 10);
+            Assert.Equal(new StringCalculator().Add("//;\n2;3;5\n7"), 17);
         }
 
     }
