@@ -14,8 +14,9 @@ namespace kata_string_calculator
                     .Where(n => n.StartsWith("-")).ToList();
                 throw new NegativesNotAllowedException($"Negatives not allowed: {string.Join(",", negatives)}");
             }
+
             if (numbers.Trim().Length == 0) return 0;
-            var delimiter = Delimiter.From(numbers); 
+            var delimiter = Delimiter.From(numbers);
             var delimiters = delimiter.GetDelimiters();
             var numbersWithoutDelimiter = RemoveDelimiters(numbers);
             return SumNumbers(numbersWithoutDelimiter, delimiters);
@@ -24,7 +25,8 @@ namespace kata_string_calculator
         private static int SumNumbers(string numbers, IEnumerable<string> customDelimiters)
         {
             var delimiters = new List<string> { ",", "\n" }.Concat(customDelimiters);
-            return numbers.Split(delimiters.ToArray(), StringSplitOptions.RemoveEmptyEntries).Select(int.Parse)
+            return numbers.Split(delimiters.ToArray(), StringSplitOptions.RemoveEmptyEntries)
+                .Select(int.Parse).Where(n => n <= 1000)
                 .Sum();
         }
 

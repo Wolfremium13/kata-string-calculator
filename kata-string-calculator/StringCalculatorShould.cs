@@ -15,6 +15,13 @@ namespace kata_string_calculator
         {
             Assert.Equal(StringCalculator.Add(" "), 0);
         }
+        
+        [Fact]
+        public void ignore_numbers_above_one_thousand()
+        {
+            Assert.Equal(StringCalculator.Add("1001"), 0);
+            Assert.Equal(StringCalculator.Add("1001,2"), 2);
+        }
 
         [Fact]
         public void give_the_same_number()
