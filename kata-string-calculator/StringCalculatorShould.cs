@@ -14,6 +14,7 @@ namespace kata_string_calculator
         public void give_the_same_number()
         {
             Assert.Equal(new StringCalculator().Add("1"), 1);
+            Assert.Equal(new StringCalculator().Add("2"), 2);
         }
     }
 }
