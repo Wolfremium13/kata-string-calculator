@@ -7,9 +7,9 @@ namespace kata_string_calculator
         public int Add(string numbers)
         {
             if (numbers.Length == 0) return 0;
-            if (numbers.Contains(","))
+            if (numbers.Contains(",") || numbers.Contains("\n"))
             {
-                var splitNumbers = numbers.Split(',');
+                var splitNumbers = numbers.Split(',', '\n');
                 return splitNumbers.Aggregate(0, (current, splitNumber) => current + int.Parse(splitNumber));
             }
             return int.Parse(numbers);
