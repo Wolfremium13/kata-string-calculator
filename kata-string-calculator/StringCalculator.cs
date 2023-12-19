@@ -18,21 +18,15 @@ namespace kata_string_calculator
             if (numbers.Trim().Length == 0) return 0;
             var delimiter = Delimiter.From(numbers);
             var delimiters = delimiter.GetDelimiters();
-            var numbersWithoutDelimiter = RemoveDelimiters(numbers);
+            var numbersWithoutDelimiter = delimiter.RemoveDelimiters(numbers);
             return SumNumbers(numbersWithoutDelimiter, delimiters);
         }
 
         private static int SumNumbers(string numbers, IEnumerable<string> customDelimiters)
         {
-            var delimiters = new List<string> { ",", "\n" }.Concat(customDelimiters);
-            return numbers.Split(delimiters.ToArray(), StringSplitOptions.RemoveEmptyEntries)
+            return numbers.Split(customDelimiters.ToArray(), StringSplitOptions.RemoveEmptyEntries)
                 .Select(int.Parse).Where(n => n <= 1000)
                 .Sum();
-        }
-
-        private static string RemoveDelimiters(string numbers)
-        {
-            return numbers.StartsWith("//") ? numbers.Substring(numbers.IndexOf('\n') + 1) : numbers;
         }
     }
 }

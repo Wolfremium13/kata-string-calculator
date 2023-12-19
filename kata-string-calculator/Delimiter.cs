@@ -42,5 +42,10 @@ namespace kata_string_calculator
             var delimiter = numbers.Substring(0, numbers.IndexOf('\n'));
             return new Delimiter(delimiter);
         }
+        
+        public string RemoveDelimiters(string numbers)
+        {
+            return _delimiter.Length == 0 ? numbers : numbers.Replace(_delimiter, "");
+        }
     }
 }
