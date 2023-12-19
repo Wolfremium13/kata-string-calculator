@@ -13,10 +13,10 @@ namespace kata_string_calculator
             var numbers =
                 delimiter.RemoveDelimitersFrom(givenText)
                     .Split(delimiter.GetDelimiters(), StringSplitOptions.RemoveEmptyEntries)
-                    .Where(n =>
+                    .Where(text =>
                         {
                             const int maximumNumberAllowed = 1000;
-                            return int.TryParse(n, out var number) && number <= maximumNumberAllowed;
+                            return int.TryParse(text, out var number) && number <= maximumNumberAllowed;
                         }
                     )
                     .Select(int.Parse).ToList();
