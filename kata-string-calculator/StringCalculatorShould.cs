@@ -29,5 +29,12 @@ namespace kata_string_calculator
         {
             Assert.Equal(new StringCalculator().Add("2\n3\n5"), 10);
         }
+        
+        [Fact]
+        public void sum_using_custom_delimiters()
+        {
+            Assert.Equal(new StringCalculator().Add("//;\n2;3;5"), 10);
+        }
+
     }
 }
