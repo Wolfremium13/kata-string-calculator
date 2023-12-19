@@ -11,17 +11,20 @@ namespace kata_string_calculator
             {
                 var delimiter = numbers[2];
                 var numbersWithoutDelimiter = numbers.Substring(4);
-                var splitNumbers = numbersWithoutDelimiter.Split(delimiter);
-                return splitNumbers.Aggregate(0, (current, splitNumber) => current + int.Parse(splitNumber));
+                return SumNumbers(numbersWithoutDelimiter, new[] {delimiter});
             }
 
             if (numbers.Contains(",") || numbers.Contains("\n"))
             {
-                var splitNumbers = numbers.Split(',', '\n');
-                return splitNumbers.Aggregate(0, (current, splitNumber) => current + int.Parse(splitNumber));
+                return SumNumbers(numbers, new[] {',', '\n'});
             }
 
             return int.Parse(numbers);
+        }
+
+        private static int SumNumbers(string numbers, char[] delimiters)
+        {
+            return numbers.Split(delimiters).Aggregate(0, (a, b) => a + int.Parse(b));
         }
     }
 }
