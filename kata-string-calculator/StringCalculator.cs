@@ -4,10 +4,11 @@ namespace kata_string_calculator
     {
         public int Add(string numbers)
         {
-            if (numbers == "1")
+            if (numbers.Length > 0)
             {
-                return 1;
+                return int.Parse(numbers);
             }
+
             return 0;
         }
     }
