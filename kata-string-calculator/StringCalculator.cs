@@ -8,6 +8,12 @@ namespace kata_string_calculator
     {
         public static int Add(string numbers)
         {
+            if (numbers.Contains("-"))
+            {
+                var negatives = numbers.Split(new[] { ",", "\n" }, StringSplitOptions.RemoveEmptyEntries)
+                    .Where(n => n.StartsWith("-")).ToList();
+                throw new NegativesNotAllowedException($"Negatives not allowed: {string.Join(",", negatives)}");
+            }
             if (numbers.Length == 0) return 0;
             var delimiter = Delimiter.From(numbers); 
             var delimiters = delimiter.GetDelimiters();
