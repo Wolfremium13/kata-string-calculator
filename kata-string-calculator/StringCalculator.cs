@@ -9,7 +9,8 @@ namespace kata_string_calculator
         public static int Add(string numbers)
         {
             if (numbers.Length == 0) return 0;
-            var delimiters = GetDelimiters(numbers);
+            var delimiter = Delimiter.From(numbers); 
+            var delimiters = delimiter.GetDelimiters();
             var numbersWithoutDelimiter = RemoveDelimiters(numbers);
             return SumNumbers(numbersWithoutDelimiter, delimiters);
         }
@@ -24,24 +25,6 @@ namespace kata_string_calculator
         private static string RemoveDelimiters(string numbers)
         {
             return numbers.StartsWith("//") ? numbers.Substring(numbers.IndexOf('\n') + 1) : numbers;
-        }
-
-        private static IEnumerable<string> GetDelimiters(string numbers)
-        {
-            var defaultDelimiters = new List<string>() { ",", "\n" };
-            if (!numbers.StartsWith("//")) return defaultDelimiters;
-            if (numbers[2] == '[')
-            {
-                var delimiter = numbers.Substring(3, numbers.IndexOf(']') - 3);
-                defaultDelimiters.Add(delimiter);
-            }
-            else
-            {
-                var delimiter = numbers[2].ToString();
-                defaultDelimiters.Add(delimiter);
-            }
-
-            return defaultDelimiters;
         }
     }
 }

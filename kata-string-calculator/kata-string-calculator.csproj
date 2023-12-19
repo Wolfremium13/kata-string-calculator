@@ -52,6 +52,7 @@
         </Reference>
     </ItemGroup>
     <ItemGroup>
+        <Compile Include="Delimiter.cs" />
         <Compile Include="StringCalculator.cs" />
         <Compile Include="StringCalculatorShould.cs" />
         <Compile Include="Properties\AssemblyInfo.cs"/>
