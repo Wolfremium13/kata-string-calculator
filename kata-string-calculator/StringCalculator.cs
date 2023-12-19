@@ -14,7 +14,7 @@ namespace kata_string_calculator
                     .Where(n => n.StartsWith("-")).ToList();
                 throw new NegativesNotAllowedException($"Negatives not allowed: {string.Join(",", negatives)}");
             }
-            if (numbers.Length == 0) return 0;
+            if (numbers.Trim().Length == 0) return 0;
             var delimiter = Delimiter.From(numbers); 
             var delimiters = delimiter.GetDelimiters();
             var numbersWithoutDelimiter = RemoveDelimiters(numbers);

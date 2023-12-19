@@ -9,6 +9,12 @@ namespace kata_string_calculator
         {
             Assert.Equal(StringCalculator.Add(""), 0);
         }
+        
+        [Fact]
+        public void ignore_empty_spaces()
+        {
+            Assert.Equal(StringCalculator.Add(" "), 0);
+        }
 
         [Fact]
         public void give_the_same_number()
