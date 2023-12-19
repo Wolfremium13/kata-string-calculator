@@ -9,5 +9,11 @@ namespace kata_string_calculator
         {
             Assert.Equal(new StringCalculator().Add(""), 0);
         }
+
+        [Fact]
+        public void give_the_same_number()
+        {
+            Assert.Equal(new StringCalculator().Add("1"), 1);
+        }
     }
 }
