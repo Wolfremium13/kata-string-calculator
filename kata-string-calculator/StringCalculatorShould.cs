@@ -23,5 +23,11 @@ namespace kata_string_calculator
             Assert.Equal(new StringCalculator().Add("1,2"), 3);
             Assert.Equal(new StringCalculator().Add("2,3,5"), 10);
         }
+        
+        [Fact]
+        public void sum_using_new_lines()
+        {
+            Assert.Equal(new StringCalculator().Add("2\n3\n5"), 10);
+        }
     }
 }
