@@ -6,27 +6,22 @@ namespace kata_string_calculator
 {
     public class StringCalculator
     {
-        public static int Add(string numbers)
+        public static int Add(string givenText)
         {
-            if (numbers.Contains("-"))
-            {
-                var negatives = numbers.Split(new[] { ",", "\n" }, StringSplitOptions.RemoveEmptyEntries)
-                    .Where(n => n.StartsWith("-")).ToList();
-                throw new NegativesNotAllowedException($"Negatives not allowed: {string.Join(",", negatives)}");
-            }
-
-            if (numbers.Trim().Length == 0) return 0;
-            var delimiter = Delimiter.From(numbers);
-            var delimiters = delimiter.GetDelimiters();
-            var numbersWithoutDelimiter = delimiter.RemoveDelimiters(numbers);
-            return SumNumbers(numbersWithoutDelimiter, delimiters);
-        }
-
-        private static int SumNumbers(string numbers, IEnumerable<string> customDelimiters)
-        {
-            return numbers.Split(customDelimiters.ToArray(), StringSplitOptions.RemoveEmptyEntries)
-                .Select(int.Parse).Where(n => n <= 1000)
-                .Sum();
+            if (givenText.Trim().Length == 0) return 0;
+            var delimiter = Delimiter.From(givenText);
+            var numbers =
+                delimiter.RemoveDelimitersFrom(givenText)
+                    .Split(delimiter.GetDelimiters(), StringSplitOptions.RemoveEmptyEntries)
+                    .Where(n =>
+                        {
+                            const int maximumNumberAllowed = 1000;
+                            return int.TryParse(n, out var number) && number <= maximumNumberAllowed;
+                        }
+                    )
+                    .Select(int.Parse).ToList();
+            if (numbers.Any(n => n < 0)) throw new NegativesNotAllowedException("Negatives not allowed");
+            return numbers.Sum();
         }
     }
 }

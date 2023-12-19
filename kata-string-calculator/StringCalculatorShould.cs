@@ -22,6 +22,13 @@ namespace kata_string_calculator
             Assert.Equal(StringCalculator.Add("1001"), 0);
             Assert.Equal(StringCalculator.Add("1001,2"), 2);
         }
+        
+        [Fact]
+        public void ignore_non_numbers()
+        {
+            Assert.Equal(StringCalculator.Add("a"), 0);
+            Assert.Equal(StringCalculator.Add("a,2"), 2);
+        }
 
         [Fact]
         public void give_the_same_number()

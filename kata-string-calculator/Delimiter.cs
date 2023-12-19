@@ -16,15 +16,15 @@ namespace kata_string_calculator
             _delimiter = delimiter;
         }
 
-        public IEnumerable<string> GetDelimiters()
+        public string[] GetDelimiters()
         {
-            if (_delimiter.Length == 0) return _delimiters.ToList();
+            if (_delimiter.Length == 0) return _delimiters.ToArray();
             if (_delimiter.Contains(StartOfCustomDelimiter) && _delimiter.Contains(EndOfCustomDelimiter))
             {
-                return _delimiters.Concat(GetCustomDelimiters()).ToList();
+                return _delimiters.Concat(GetCustomDelimiters()).ToArray();
             }
 
-            return _delimiters.Concat(new List<string> { _delimiter.Substring(2) }).ToList();
+            return _delimiters.Concat(new List<string> { _delimiter.Substring(2) }).ToArray();
         }
 
         private IEnumerable<string> GetCustomDelimiters()
@@ -42,8 +42,8 @@ namespace kata_string_calculator
             var delimiter = numbers.Substring(0, numbers.IndexOf('\n'));
             return new Delimiter(delimiter);
         }
-        
-        public string RemoveDelimiters(string numbers)
+
+        public string RemoveDelimitersFrom(string numbers)
         {
             return _delimiter.Length == 0 ? numbers : numbers.Replace(_delimiter, "");
         }
