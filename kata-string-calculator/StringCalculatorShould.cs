@@ -16,5 +16,11 @@ namespace kata_string_calculator
             Assert.Equal(new StringCalculator().Add("1"), 1);
             Assert.Equal(new StringCalculator().Add("2"), 2);
         }
+
+        [Fact]
+        public void sum_numbers()
+        {
+            Assert.Equal(new StringCalculator().Add("1,2"), 3);
+        }
     }
 }
