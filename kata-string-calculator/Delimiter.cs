@@ -6,6 +6,8 @@ namespace kata_string_calculator
 {
     public class Delimiter
     {
+        private const string StartOfCustomDelimiter = "[";
+        private const string EndOfCustomDelimiter = "]";
         private readonly string _delimiter;
         private readonly List<string> _delimiters = new List<string>() { ",", "\n" };
 
@@ -17,23 +19,26 @@ namespace kata_string_calculator
         public IEnumerable<string> GetDelimiters()
         {
             if (_delimiter.Length == 0) return _delimiters.ToList();
-            if (_delimiter.Contains("[") && _delimiter.Contains("]"))
+            if (_delimiter.Contains(StartOfCustomDelimiter) && _delimiter.Contains(EndOfCustomDelimiter))
             {
                 return _delimiters.Concat(GetCustomDelimiters()).ToList();
             }
+
             return _delimiters.Concat(new List<string> { _delimiter.Substring(2) }).ToList();
         }
 
         private IEnumerable<string> GetCustomDelimiters()
         {
             var delimiter = _delimiter.Substring(2);
-            var delimiters = delimiter.Split(new[] { "[", "]" }, StringSplitOptions.RemoveEmptyEntries);
+            var delimiters = delimiter.Split(new[] { StartOfCustomDelimiter, EndOfCustomDelimiter },
+                StringSplitOptions.RemoveEmptyEntries);
             return delimiters;
         }
 
         public static Delimiter From(string numbers)
         {
-            if (!numbers.StartsWith("//")) return new Delimiter("");
+            const string delimiterInitialization = "//";
+            if (!numbers.StartsWith(delimiterInitialization)) return new Delimiter("");
             var delimiter = numbers.Substring(0, numbers.IndexOf('\n'));
             return new Delimiter(delimiter);
         }
